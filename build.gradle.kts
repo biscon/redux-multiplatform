@@ -23,6 +23,10 @@ kotlin {
             useJUnitPlatform()
         }
     }
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -38,7 +42,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation(compose.desktop.currentOs)
+                implementation(compose.ui)
             }
         }
         val jvmTest by getting
