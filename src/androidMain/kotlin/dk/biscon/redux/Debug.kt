@@ -61,9 +61,17 @@ actual fun logStateDiff(state1: Any, state2: Any) {
                 val value2 = member.get(state2)
                 if (value1 != value2) {
                     append("\t${member.name}: ")
-                    append(formatValue(value1))
+                    if (value1 is SingleEvent<*>) {
+                        append("SingleEvent(${formatValue(value1.peek())})")
+                    } else {
+                        append(formatValue(value1))
+                    }
                     append(" -> ")
-                    append("${formatValue(value2)}\n")
+                    if (value2 is SingleEvent<*>) {
+                        append("SingleEvent(${formatValue(value2.peek())})\n")
+                    } else {
+                        append("${formatValue(value2)}\n")
+                    }
                 }
             }.also {
                 log(it.toString())
